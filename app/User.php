@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Relations\HasManyComments;
+use App\Relations\HasManyPosts;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -9,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasManyComments, HasManyPosts;
 
     /**
      * The attributes that are mass assignable.
@@ -37,14 +40,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
+
+
 
 }
